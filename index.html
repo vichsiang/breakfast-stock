@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>早餐店</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%231a233a'/%3E%3Cpath%20d='M20%2070%20L40%2050%20L55%2065%20L80%2030'%20stroke='%23e9c46a'%20stroke-width='8'%20fill='none'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='80'%20cy='30'%20r='6'%20fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%231a233a'/%3E%3Cpath%20d='M20%2070%20L40%2050%20L55%2065%20L80%2030'%20stroke='%23e9c46a'%20stroke-width='8'%20fill='none'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='80'%20cy='30'%20r='6'%20fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%231a233a'/%3E%3Cpath%20d='M20%2070%20L40%2050%20L55%2065%20L80%2030'%20stroke='%23e9c46a'%20stroke-width='8'%20fill='none'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='80'%20cy='30'%20r='6'%20fill='%23fff'/%3E%3C/svg%3E">
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="早餐店">
+  <meta name="application-name" content="早餐店">
+  <meta name="theme-color" content="#1a233a">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* === 六大高質感布景主題 === */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      --card-bg: rgba(30, 41, 59, 0.85);
+      --card-solid: #1e293b; 
+      --text-color: #f1f5f9; --text-muted: #94a3b8;
+      --primary-color: #38bdf8;
+      --up-color: #f43f5e; --down-color: #10b981;
+      --up-bg: rgba(244, 63, 94, 0.15); --down-bg: rgba(16, 185, 129, 0.15);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --shadow-dark: rgba(0, 0, 0, 0.6);
+      --shadow-light: rgba(255, 255, 255, 0.05);
+      --input-bg: rgba(15, 23, 42, 0.6);
+    }
+    [data-theme="cloud-white"] {
+      --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-solid: #ffffff;
+      --text-color: #0f172a; --text-muted: #64748b;
+      --primary-color: #3b82f6;
+      --up-color: #dc2626; --down-color: #059669;
+      --up-bg: rgba(220, 38, 38, 0.1); --down-bg: rgba(5, 150, 105, 0.1);
+      --border-color: rgba(15, 23, 42, 0.1);
+      --shadow-dark: rgba(100, 116, 139, 0.4);
+      --shadow-light: rgba(255, 255, 255, 0.9);
+      --input-bg: rgba(241, 245, 249, 0.7);
+    }
+    [data-theme="tech-blue"] {
+      --bg-gradient: linear-gradient(135deg, #0b1e33 0%, #122e4a 100%);
+      --card-bg: rgba(16, 33, 54, 0.8);
+      --card-solid: #102136;
+      --text-color: #dbeafe; --text-muted: #93c5fd;
+      --primary-color: #38bdf8;
+      --up-color: #fb7185; --down-color: #34d399;
+      --up-bg: rgba(251, 113, 133, 0.15); --down-bg: rgba(52, 211, 153, 0.15);
+      --border-color: rgba(56, 189, 248, 0.2);
+      --shadow-dark: rgba(0, 0, 0, 0.7);
+      --shadow-light: rgba(56, 189, 248, 0.08);
+      --input-bg: rgba(11, 30, 51, 0.7);
+    }
+    [data-theme="forest-green"] {
+      --bg-gradient: linear-gradient(135deg, #0f1f1c 0%, #1a2e2a 100%);
+      --card-bg: rgba(26, 46, 42, 0.85);
+      --card-solid: #1a2e2a;
+      --text-color: #ecfdf5; --text-muted: #a7f3d0;
+      --primary-color: #34d399;
+      --up-color: #f87171; --down-color: #22d3ee;
+      --up-bg: rgba(248, 113, 113, 0.15); --down-bg: rgba(34, 211, 238, 0.15);
+      --border-color: rgba(52, 211, 153, 0.15);
+      --shadow-dark: rgba(0, 0, 0, 0.5);
+      --shadow-light: rgba(52, 211, 153, 0.08);
+      --input-bg: rgba(15, 31, 28, 0.6);
+    }
+    [data-theme="warm-paper"] {
+      --bg-gradient: linear-gradient(135deg, #fdfbf7 0%, #f3f4f6 100%);
+      --card-bg: rgba(255, 254, 250, 0.95);
+      --card-solid: #fffefa;
+      --text-color: #44403c; --text-muted: #78716c;
+      --primary-color: #d97706;
+      --up-color: #b91c1c; --down-color: #047857;
+      --up-bg: rgba(185, 28, 28, 0.08); --down-bg: rgba(4, 120, 87, 0.08);
+      --border-color: rgba(120, 113, 108, 0.15);
+      --shadow-dark: rgba(120, 113, 108, 0.25);
+      --shadow-light: rgba(255, 255, 255, 0.9);
+      --input-bg: rgba(253, 251, 247, 0.7);
+    }
+    [data-theme="neon-cyber"] {
+      --bg-gradient: linear-gradient(135deg, #0c0a16 0%, #1e1b4b 100%);
+      --card-bg: rgba(30, 27, 75, 0.8);
+      --card-solid: #1e1b4b;
+      --text-color: #f0f9ff; --text-muted: #c4b5fd;
+      --primary-color: #d946ef;
+      --up-color: #ff0055; --down-color: #00ff99;
+      --up-bg: rgba(255, 0, 85, 0.15); --down-bg: rgba(0, 255, 153, 0.15);
+      --border-color: rgba(217, 70, 239, 0.3);
+      --shadow-dark: rgba(0, 0, 0, 0.7);
+      --shadow-light: rgba(217, 70, 239, 0.08);
+      --input-bg: rgba(12, 10, 22, 0.6);
+    }
+
+    body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg-gradient); background-attachment: fixed; color: var(--text-color); transition: all 0.4s ease; min-height: 100vh; }
+    .navbar { background: transparent; box-shadow: none; }
+    .navbar-brand { font-size: 1.1rem; font-weight: 900; color: var(--text-color); text-shadow: 0 2px 4px rgba(0,0,0,0.2); line-height: 1.2; display: flex; align-items: center; gap: 8px; }
+    
+    .lang-main { display: flex; flex-direction: column; line-height: 1.2; font-size: 1rem; }
+    .lang-sub { font-size: 0.7rem; font-weight: 400; opacity: 0.7; }
+
+    .glass-card { 
+      background: var(--card-bg); 
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
+      border-radius: 20px; 
+      box-shadow: 12px 12px 24px var(--shadow-dark), -12px -12px 24px var(--shadow-light), inset 0 2px 2px rgba(255,255,255,0.05); 
+      border: 1px solid var(--border-color); 
+      transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    }
+    .glass-card:hover { 
+      transform: translateY(-4px) scale(1.01); 
+      box-shadow: 16px 16px 32px var(--shadow-dark), -16px -16px 32px var(--shadow-light), inset 0 2px 2px rgba(255,255,255,0.05); 
+    }
+
+    /* === 雙區塊儀表板 === */
+    .dash-group { 
+      padding: 10px 5px; margin-bottom: 10px; 
+      display: flex; align-items: center; justify-content: space-around; 
+    }
+    .dash-item { 
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; 
+      text-align: center; padding: 2px;
+    }
+    .dash-item .dash-label { 
+      font-size: 0.8rem; margin-bottom: 4px; justify-content: center; 
+    }
+    .dash-item .dash-label i { margin-right: 4px; }
+    .dash-item .dash-value { 
+      font-size: 1.15rem; font-weight: 800; line-height: 1.2; 
+    }
+    .dash-roi { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
+    .dash-vline { 
+      width: 1px; height: 70%; 
+      background: var(--border-color); 
+      box-shadow: 1px 0 1px var(--shadow-light); 
+    }
+
+    .neo-input { 
+      background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; 
+      color: var(--text-color); padding: 0.6rem 0.8rem; transition: all 0.3s; font-size: 0.9rem; 
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); 
+    }
+    .neo-input:focus { 
+      box-shadow: inset 6px 6px 10px var(--shadow-dark), inset -6px -6px 10px var(--shadow-light); 
+      border-color: var(--primary-color); background: var(--input-bg); color: var(--text-color); outline: none; 
+    }
+    .neo-input::placeholder { color: var(--text-muted); font-size: 0.85rem; }
+
+    .form-label { display: flex; flex-direction: column; line-height: 1.2; font-size: 0.9rem; }
+    .form-label .lang-sub { margin-top: 2px; }
+
+    .btn-neo-primary { 
+      background: var(--primary-color); color: white; border: none; border-radius: 12px; font-weight: 700; 
+      transition: all 0.2s ease; box-shadow: 6px 6px 12px var(--shadow-dark), -4px -4px 10px var(--shadow-light), inset 0 2px 2px rgba(255,255,255,0.3); 
+      font-size: 0.9rem; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.2; 
+    }
+    .btn-neo-primary .lang-sub { font-size: 0.65rem; font-weight: 400; opacity: 0.9; margin-top: 2px; }
+    .btn-neo-primary:active { transform: translateY(4px); box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -2px -2px 6px var(--shadow-light); }
+    
+    .btn-neo-icon { 
+      background: var(--card-bg); backdrop-filter: blur(12px); color: var(--text-color); border: 1px solid var(--border-color); 
+      width: 32px; height: 32px; border-radius: 8px; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; 
+      box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); 
+    }
+    .btn-neo-icon:active { transform: translateY(2px); box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light); }
+
+    .add-stock-btn { 
+      padding: 8px 14px; border-radius: 10px; background: var(--primary-color); color: white; border: none; font-weight: 700; 
+      display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 5px 5px 10px var(--shadow-dark), -3px -3px 8px var(--shadow-light), inset 0 2px 2px rgba(255,255,255,0.3); 
+      transition: all 0.2s ease; font-size: 0.9rem; 
+    }
+    .add-stock-btn:active { transform: translateY(3px); box-shadow: inset 3px 3px 6px var(--shadow-dark); }
+
+    .text-up { color: var(--up-color) !important; font-weight: 700; }  
+    .text-down { color: var(--down-color) !important; font-weight: 700; } 
+    .bg-up { background-color: var(--up-bg) !important; }
+    .bg-down { background-color: var(--down-bg) !important; }
+
+    .dividend-card { padding: 12px 18px; margin-bottom: 15px; }
+    .div-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+    .div-chevron { transition: transform 0.3s ease; color: var(--text-muted); }
+    .div-chevron.rotate { transform: rotate(180deg); }
+    .div-content { display: none; margin-top: 15px; animation: slideDown 0.3s ease; }
+    
+    .div-input-group { display: flex; gap: 6px; align-items: center; margin-bottom: 10px; }
+    .div-input-group input { flex: 1; min-width: 0; padding: 0.4rem 0.5rem; font-size: 0.75rem; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); box-shadow: inset 2px 2px 4px var(--shadow-dark); }
+    .div-input-group input:focus { outline: none; border-color: var(--primary-color); }
+    .div-input-group button { flex: 0 0 auto; padding: 0.4rem 0.7rem; font-size: 0.75rem; border: none; border-radius: 8px; background: var(--primary-color); color: white; font-weight: 700; display: flex; align-items: center; gap: 4px; box-shadow: 3px 3px 6px var(--shadow-dark); }
+
+    .div-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; margin-bottom: 6px; border-radius: 8px; background: var(--input-bg); border: 1px solid var(--border-color); font-size: 0.8rem; box-shadow: inset 2px 2px 4px var(--shadow-dark); }
+
+    /* 各股區面板極致微縮，字體不變 */
+    .stock-list-container { padding: 5px; }
+    .stock-item { border-bottom: 1px solid var(--border-color); padding-bottom: 4px; margin-bottom: 4px; }
+    .stock-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    
+    .swipe-container { position: relative; overflow: hidden; }
+    .swipe-actions { position: absolute; top: 0; right: 0; bottom: 0; display: flex; }
+    .swipe-btn { width: 55px; border: none; display: flex; align-items: center; justify-content: center; color: white; font-size: 1rem; box-shadow: none; }
+    .edit-btn { background: var(--primary-color); border-radius: 0 8px 8px 0; }
+    .delete-btn { background: var(--up-color); border-radius: 0 8px 8px 0; }
+    
+    .swipe-content { 
+      position: relative; z-index: 2; background: var(--card-solid); 
+      transition: transform 0.3s ease; touch-action: pan-y; 
+      border-radius: 10px; padding: 1px 4px;
+    }
+    .swipe-content.swiped { transform: translateX(-110px); }
+
+    .stock-header { display: flex; justify-content: space-between; align-items: center; padding: 1px 4px; gap: 8px; margin-bottom: 0; }
+    .stock-sym-info { display: flex; align-items: center; gap: 10px; }
+    .stock-symbol { font-size: 1.2rem; font-weight: 800; }
+    .stock-lots { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; background: var(--input-bg); padding: 1px 8px; border-radius: 6px; box-shadow: inset 1px 1px 2px var(--shadow-dark); }
+    
+    .stock-detail { display: flex; flex-direction: column; padding: 0 4px; }
+    
+    .detail-scroll {
+      display: flex; gap: 6px; overflow-x: auto; padding: 0; margin-bottom: 0;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .detail-scroll::-webkit-scrollbar { display: none; }
+    .detail-box { 
+      flex: 0 0 auto; width: 135px; 
+      background: var(--input-bg); padding: 6px; border-radius: 8px; border: 1px solid var(--border-color); 
+      box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); 
+    }
+    .detail-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; display: flex; flex-direction: column; line-height: 1.1; }
+    .detail-label .lang-sub { font-size: 0.6rem; opacity: 0.8; }
+    .detail-main { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+    .detail-sub { font-size: 0.75rem; color: var(--text-muted); display: flex; flex-direction: column; line-height: 1.1; border-top: 1px solid var(--border-color); padding-top: 2px; }
+    .detail-sub .lang-sub { font-size: 0.6rem; opacity: 0.8; }
+
+    .theme-dropdown { position: absolute; top: 65px; right: 15px; background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 16px; padding: 10px; box-shadow: 12px 12px 24px var(--shadow-dark), -12px -12px 24px var(--shadow-light); border: 1px solid var(--border-color); z-index: 1050; display: none; width: 170px; }
+    .theme-item { display: flex; align-items: center; padding: 8px; border-radius: 8px; cursor: pointer; color: var(--text-color); transition: all 0.2s; font-weight: 500; font-size: 0.85rem; }
+    .theme-item:hover { background: var(--up-bg); }
+    .theme-item.active { background: var(--up-bg); font-weight: 700; color: var(--primary-color); }
+    .theme-color-dot { width: 16px; height: 16px; border-radius: 50%; margin-right: 8px; border: 1px solid var(--border-color); }
+
+    .modal-content { background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border-color); border-radius: 20px; box-shadow: 15px 15px 30px var(--shadow-dark), -15px -15px 30px var(--shadow-light); }
+    .modal-header, .modal-footer { border: none; }
+    .modal-title { color: var(--text-color); font-weight: 700; font-size: 1.1rem; display: flex; flex-direction: column; line-height: 1.2; }
+    .modal-title .lang-sub { font-size: 0.75rem; font-weight: 400; opacity: 0.8; }
+    .modal-backdrop.show { opacity: 0.5; }
+
+    /* === 3D 立體密碼解鎖彈窗 === */
+    .pwd-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      z-index: 9999; display: none; align-items: center; justify-content: center;
+      animation: fadeIn 0.2s ease;
+    }
+    .pwd-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 30px 25px;
+      width: 280px;
+      max-width: 90%;
+      box-shadow: 12px 12px 24px var(--shadow-dark), -12px -12px 24px var(--shadow-light);
+      animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-align: center;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+    .shake { animation: shake 0.4s ease; }
+    
+    .pwd-lock-icon { width: 50px; height: 50px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.2rem; box-shadow: 0 6px 12px var(--shadow-dark); }
+    .pwd-title { font-weight: 700; margin-bottom: 5px; font-size: 1.1rem; color: var(--text-color); }
+    .pwd-subtitle { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; }
+    .pwd-dots { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+    .pwd-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--text-muted); transition: all 0.2s; box-shadow: inset 1px 1px 2px var(--shadow-dark); }
+    .pwd-dot.filled { background: var(--primary-color); border-color: var(--primary-color); box-shadow: 0 0 8px var(--primary-color); }
+    .pwd-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .pwd-key {
+      background: var(--card-bg); border: none; border-radius: 12px;
+      height: 50px; font-size: 1.3rem; font-weight: 700; color: var(--text-color);
+      cursor: pointer; transition: all 0.15s; user-select: none;
+      box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+    }
+    .pwd-key:active { transform: translateY(3px); box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); }
+    .pwd-key.action { color: var(--up-color); font-size: 1rem; }
+    .pwd-error { color: var(--up-color); font-size: 0.8rem; margin-top: 15px; height: 1rem; display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- 3D 立體密碼解鎖彈窗 -->
+  <div id="pwdOverlay" class="pwd-overlay">
+    <div class="pwd-card" id="pwdCard">
+      <div class="pwd-lock-icon"><i class="fas fa-lock"></i></div>
+      <div class="pwd-title">Xác nhận mật khẩu</div>
+      <div class="pwd-subtitle">請輸入密碼以執行操作</div>
+      <div class="pwd-dots" id="pwdDots">
+        <div class="pwd-dot"></div><div class="pwd-dot"></div><div class="pwd-dot"></div><div class="pwd-dot"></div>
+      </div>
+      <div class="pwd-keypad">
+        <button class="pwd-key" onclick="pressKey('1')">1</button>
+        <button class="pwd-key" onclick="pressKey('2')">2</button>
+        <button class="pwd-key" onclick="pressKey('3')">3</button>
+        <button class="pwd-key" onclick="pressKey('4')">4</button>
+        <button class="pwd-key" onclick="pressKey('5')">5</button>
+        <button class="pwd-key" onclick="pressKey('6')">6</button>
+        <button class="pwd-key" onclick="pressKey('7')">7</button>
+        <button class="pwd-key" onclick="pressKey('8')">8</button>
+        <button class="pwd-key" onclick="pressKey('9')">9</button>
+        <button class="pwd-key action" onclick="cancelPwd()"><i class="fas fa-times"></i></button>
+        <button class="pwd-key" onclick="pressKey('0')">0</button>
+        <button class="pwd-key action" onclick="pressBackspace()"><i class="fas fa-delete-left"></i></button>
+      </div>
+      <div class="pwd-error" id="pwdError">Sai mật khẩu! (密碼錯誤！)</div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg mb-3 py-3">
+    <div class="container-fluid px-3 d-flex justify-content-between align-items-center position-relative">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-store"></i>
+        <span class="lang-main">
+          Quán Ăn Sáng
+          <span class="lang-sub">早餐店</span>
+        </span>
+      </a>
+      <div class="d-flex align-items-center gap-2">
+        <button class="add-stock-btn" onclick="openAddModal()">
+          <i class="fas fa-plus"></i> Thêm <span class="lang-sub" style="font-size: 0.65rem;">新增</span>
+        </button>
+        <button id="themeToggleBtn" class="btn-neo-icon" onclick="toggleThemeDropdown()" title="切換布景主題">
+          <i class="fas fa-palette" style="color: var(--primary-color);"></i>
+        </button>
+      </div>
+      <div id="themeDropdown" class="theme-dropdown">
+        <div class="theme-item" data-theme="light" onclick="setTheme('light')"><div class="theme-color-dot" style="background: linear-gradient(135deg, #0f172a, #1e293b);"></div>質感暗夜</div>
+        <div class="theme-item" data-theme="cloud-white" onclick="setTheme('cloud-white')"><div class="theme-color-dot" style="background: linear-gradient(135deg, #f8fafc, #e2e8f0);"></div>雲端白金</div>
+        <div class="theme-item" data-theme="tech-blue" onclick="setTheme('tech-blue')"><div class="theme-color-dot" style="background: linear-gradient(135deg, #0b1e33, #122e4a);"></div>科技商務藍</div>
+        <div class="theme-item" data-theme="forest-green" onclick="setTheme('forest-green')"><div class="theme-color-dot" style="background: linear-gradient(135deg, #0f1f1c, #1a2e2a);"></div>自然森綠</div>
+        <div class="theme-item" data-theme="warm-paper" onclick="setTheme('warm-paper')"><div class="theme-color-dot" style="background: linear-gradient(135deg, #fdfbf7, #f3f4f6);"></div>極簡紙感</div>
+        <div class="theme-item" data-theme="neon-cyber" onclick="setTheme('neon-cyber')"><div class="theme-color-dot" style="background: linear-gradient(135deg, #0c0a16, #1e1b4b);"></div>霓虹賽博</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid px-3" style="max-width: 800px;">
+
+    <!-- 雙區塊儀表板 -->
+    <div class="mb-3">
+      <div class="glass-card dash-group">
+        <div class="dash-item">
+          <span class="dash-label">
+            <i class="fas fa-wallet"></i>
+            <span class="lang-main">
+              Tổng chi phí
+              <span class="lang-sub">總投資成本</span>
+            </span>
+          </span>
+          <span class="dash-value" id="dashTotalCost">Đang tải...</span>
+        </div>
+        <div class="dash-vline"></div>
+        <div class="dash-item">
+          <span class="dash-label">
+            <i class="fas fa-coins"></i>
+            <span class="lang-main">
+              Tổng giá trị
+              <span class="lang-sub">目前總市值</span>
+            </span>
+          </span>
+          <span class="dash-value" id="dashTotalValue">Đang tải...</span>
+        </div>
+      </div>
+      
+      <div class="glass-card dash-group">
+        <div class="dash-item">
+          <span class="dash-label">
+            <i class="fas fa-bolt"></i>
+            <span class="lang-main">
+              Lãi/Lỗ hôm nay
+              <span class="lang-sub">今日總損益</span>
+            </span>
+          </span>
+          <span class="dash-value" id="dashTodayProfit">Đang tải...</span>
+        </div>
+        <div class="dash-vline"></div>
+        <div class="dash-item">
+          <span class="dash-label">
+            <i class="fas fa-chart-pie"></i>
+            <span class="lang-main">
+              Tổng lợi nhuận
+              <span class="lang-sub">累積總獲利</span>
+            </span>
+          </span>
+          <span class="dash-value" id="dashTotalProfit">Đang tải...</span>
+          <span class="dash-roi" id="dashROI">(0%)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card dividend-card">
+      <div class="div-header" onclick="toggleDividendCard()">
+        <span class="dash-label" style="font-size: 0.95rem; color: var(--text-muted); font-weight: 600;">
+          <i class="fas fa-calendar-plus me-2" style="color: var(--primary-color);"></i>
+          <span class="lang-main">
+            Ghi nhận cổ tức dự kiến
+            <span class="lang-sub">預計配息記錄</span>
+          </span>
+        </span>
+        <i class="fas fa-chevron-down div-chevron" id="divChevron"></i>
+      </div>
+      <div class="div-content" id="divContent">
+        <div class="div-input-group">
+          <input type="text" id="divSymbol" placeholder="Mã CP" title="代號">
+          <input type="date" id="divDate" title="日期">
+          <input type="number" id="divAmount" placeholder="Tiền" title="金額">
+          <button onclick="addDividend()">
+            <i class="fas fa-plus"></i> Thêm
+          </button>
+        </div>
+        <div id="dividendList" style="max-height: 150px; overflow-y: auto;"></div>
+      </div>
+    </div>
+
+    <div class="glass-card stock-list-container mb-5">
+      <div id="stockListBody">
+        <div class="text-center py-5 text-muted"><i class="fas fa-spinner fa-spin me-2"></i>Đang tải dữ liệu...<br><span class="lang-sub">資料同步中...</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="formModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">
+            <i class="fas fa-plus me-2"></i>
+            <span class="lang-main">
+              Thêm Cổ Phiếu
+              <span class="lang-sub">新增股票</span>
+            </span>
+          </h5>
+          <button type="button" class="btn-neo-icon" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="stockForm">
+            <div class="mb-3">
+              <label class="form-label text-muted small fw-bold">
+                Mã cổ phiếu <span class="lang-sub">股票代號</span>
+              </label>
+              <input type="text" class="form-control neo-input" id="symbol" placeholder="2330 hoặc 00878">
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-muted small fw-bold">
+                Số lượng lô <span class="lang-sub">持股張數</span>
+              </label>
+              <input type="number" step="0.01" class="form-control neo-input" id="lots" placeholder="10">
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-muted small fw-bold">
+                Tổng chi phí <span class="lang-sub">總投入成本</span>
+              </label>
+              <input type="number" class="form-control neo-input" id="totalCost" placeholder="Tổng chi phí">
+            </div>
+            <span id="statusMessage" class="small fw-bold d-block text-center text-danger mt-2"></span>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-neo-primary w-100 py-2" id="submitBtn" onclick="submitStock()">
+            Xác nhận lưu <span class="lang-sub">確認儲存</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // === 已填入你的 GAS 部署網址 ===
+    const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbzJL72nBDDQeLYh97s34rkebrcn1bwV03qEcwSbQ0-a0oYCkV0lxpSr66IbmbomsW0Q/exec'; 
+    
+    let isEditing = false;
+    let formModal;
+
+    // --- 3D 立體密碼驗證邏輯 ---
+    let pwdInput = '';
+    let pendingAction = null;
+
+    function checkPassword(callback) {
+      pendingAction = callback;
+      pwdInput = '';
+      updatePwdDots();
+      document.getElementById('pwdError').style.display = 'none';
+      document.getElementById('pwdOverlay').style.display = 'flex';
+    }
+
+    function pressKey(num) {
+      if (pwdInput.length < 4) {
+        pwdInput += num;
+        updatePwdDots();
+        if (pwdInput.length === 4) {
+          setTimeout(verifyPassword, 200);
+        }
+      }
+    }
+
+    function pressBackspace() {
+      pwdInput = pwdInput.slice(0, -1);
+      updatePwdDots();
+      document.getElementById('pwdError').style.display = 'none';
+    }
+
+    function verifyPassword() {
+      if (pwdInput === '0000') {
+        closePwdModal();
+        if (pendingAction) {
+          pendingAction();
+          pendingAction = null;
+        }
+      } else {
+        document.getElementById('pwdError').style.display = 'block';
+        const card = document.getElementById('pwdCard');
+        card.classList.add('shake');
+        setTimeout(() => {
+          card.classList.remove('shake');
+          pwdInput = '';
+          updatePwdDots();
+        }, 500);
+      }
+    }
+
+    function cancelPwd() {
+      closePwdModal();
+      pendingAction = null;
+    }
+
+    function closePwdModal() {
+      document.getElementById('pwdOverlay').style.display = 'none';
+      pwdInput = '';
+    }
+
+    function updatePwdDots() {
+      const dots = document.querySelectorAll('.pwd-dot');
+      dots.forEach((dot, index) => {
+        if (index < pwdInput.length) {
+          dot.classList.add('filled');
+        } else {
+          dot.classList.remove('filled');
+        }
+      });
+    }
+
+    // --- 主題切換 ---
+    function toggleThemeDropdown() {
+      const dropdown = document.getElementById('themeDropdown');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+    document.addEventListener('click', function(e) {
+      const dropdown = document.getElementById('themeDropdown');
+      const btn = document.getElementById('themeToggleBtn');
+      if (dropdown.style.display === 'block' && !dropdown.contains(e.target) && !btn.contains(e.target)) dropdown.style.display = 'none';
+    });
+    function setTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName === 'light' ? '' : themeName);
+      localStorage.setItem('stockTheme', themeName);
+      document.querySelectorAll('.theme-item').forEach(item => item.classList.toggle('active', item.getAttribute('data-theme') === themeName));
+      document.getElementById('themeDropdown').style.display = 'none';
+    }
+    (function initTheme() {
+      const savedTheme = localStorage.getItem('stockTheme') || 'light';
+      setTheme(savedTheme);
+    })();
+
+    // --- 工具函數 ---
+    function formatCurrency(valStr) {
+      let num = parseFloat(valStr.toString().replace(/,/g, '').replace('NT$','').replace('%',''));
+      if (isNaN(num)) return 'NT$ 0';
+      return 'NT$ ' + num.toLocaleString('zh-TW', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+    }
+    function formatPrice(valStr) {
+      let num = parseFloat(valStr.toString().replace(/,/g, '').replace('NT$','').replace('%',''));
+      if (isNaN(num)) return '0';
+      return num.toLocaleString('zh-TW', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    function setStatus(msg, type = 'success') {
+      const el = document.getElementById('statusMessage');
+      el.innerHTML = msg;
+      el.className = `small fw-bold d-block text-center text-${type} mt-2`;
+    }
+    function resetDashboard() {
+      document.getElementById('dashTotalCost').innerText = 'NT$ 0';
+      document.getElementById('dashTotalValue').innerText = 'NT$ 0';
+      document.getElementById('dashTodayProfit').innerText = 'NT$ 0';
+      document.getElementById('dashTodayProfit').className = "dash-value";
+      document.getElementById('dashTotalProfit').innerText = 'NT$ 0';
+      document.getElementById('dashTotalProfit').className = "dash-value";
+    }
+
+    // --- API 請求封裝 ---
+    async function apiPost(payload) {
+      try {
+        const res = await fetch(GAS_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // 避免 CORS 預檢請求
+          body: JSON.stringify(payload)
+        });
+        return await res.json();
+      } catch (err) {
+        return { error: err.message };
+      }
+    }
+
+    // --- 資料載入與渲染 ---
+    async function loadData() {
+      try {
+        const res = await fetch(`${GAS_API_URL}?action=getStock`);
+        const data = await res.json();
+        renderData(data);
+      } catch (err) {
+        document.getElementById('stockListBody').innerHTML = `<div class="text-center py-5 text-danger">Lỗi tải dữ liệu (載入失敗)<br>${err}</div>`;
+      }
+    }
+
+    function renderData(data) {
+      if(!data || data.error || data.length < 2) {
+        resetDashboard();
+        document.getElementById('stockListBody').innerHTML = '<div class="text-center py-5 text-muted">Chưa có bản ghi, nhấn + để thêm<br><span class="lang-sub">尚無庫存紀錄，點擊右上方 + 新增</span></div>';
+        return;
+      }
+      let listHtml = '';
+      let lastRow = data[data.length - 1]; 
+      
+      for (let i = 1; i < data.length - 1; i++) { 
+        let row = data[i];
+        if(row[0] === '' || row[0] === '總計') continue; 
+        
+        let symbol = row[0].replace('TPE:', '');
+        let lots = parseFloat(row[1].toString().replace(/,/g, '')) || 0;
+        let cost = row[2]; 
+        let price = row[3]; 
+        let changePct = row[4]; 
+        let todayProfit = row[7]; 
+        let totalProfit = row[8]; 
+        let marketValue = row[6]; 
+        let roi = row[9]; 
+
+        let costNum = parseFloat(cost.toString().replace(/,/g, '').replace('NT$','').replace('%','')) || 0;
+        let avgCost = lots > 0 ? (costNum / (lots * 1000)) : 0;
+
+        let roiVal = parseFloat(roi.replace('%',''));
+        let roiClass = roiVal > 0 ? 'text-up' : (roiVal < 0 ? 'text-down' : '');
+        
+        let todayVal = parseFloat(todayProfit.replace(/,/g, ''));
+        let todayClass = todayVal > 0 ? 'text-up' : (todayVal < 0 ? 'text-down' : '');
+        
+        let totalVal = parseFloat(totalProfit.replace(/,/g, ''));
+        let totalClass = totalVal > 0 ? 'text-up' : (totalVal < 0 ? 'text-down' : '');
+
+        let safeSymbol = row[0].replace(/'/g, "\\'");
+        let cleanLots = lots.toString().replace(/,/g, ''); 
+        let cleanTotalCost = cost.toString().replace(/,/g, '').replace('NT$ ','');
+
+        listHtml += `
+        <div class="stock-item" data-symbol="${symbol}">
+          <div class="swipe-container">
+            <div class="swipe-actions">
+              <button class="swipe-btn edit-btn" onclick="editStock('${safeSymbol}', '${cleanLots}', '${cleanTotalCost}')"><i class="fas fa-pen"></i></button>
+              <button class="swipe-btn delete-btn" onclick="removeStock('${safeSymbol}')"><i class="fas fa-trash"></i></button>
+            </div>
+            <div class="swipe-content">
+              <div class="stock-header">
+                <div class="stock-sym-info">
+                  <span class="stock-symbol">${symbol}</span>
+                  <span class="stock-lots">${lots} 張</span>
+                </div>
+              </div>
+              <div class="stock-detail">
+                <div class="detail-scroll">
+                  <div class="detail-box">
+                    <div class="detail-label">Giá TB <span class="lang-sub">投入平均成本</span></div>
+                    <div class="detail-main">NT$ ${formatPrice(avgCost.toString())}</div>
+                    <div class="detail-sub">
+                      Tổng <span class="lang-sub">總成本</span>
+                      <span>${formatCurrency(cost)}</span>
+                    </div>
+                  </div>
+                  <div class="detail-box">
+                    <div class="detail-label">Giá thị trường <span class="lang-sub">目前市價</span></div>
+                    <div class="detail-main">NT$ ${formatPrice(price)}</div>
+                    <div class="detail-sub">
+                      Giá trị <span class="lang-sub">總市值</span>
+                      <span>${formatCurrency(marketValue)}</span>
+                    </div>
+                  </div>
+                  <div class="detail-box">
+                    <div class="detail-label">Lãi/Lỗ hôm nay <span class="lang-sub">今日損益</span></div>
+                    <div class="detail-main ${todayClass}">${formatCurrency(todayProfit)}</div>
+                    <div class="detail-sub">
+                      Biến động <span class="lang-sub">漲跌幅</span>
+                      <span class="${todayClass}">${changePct}</span>
+                    </div>
+                  </div>
+                  <div class="detail-box">
+                    <div class="detail-label">Tổng Lãi/Lỗ <span class="lang-sub">累積損益</span></div>
+                    <div class="detail-main ${totalClass}">${formatCurrency(totalProfit)}</div>
+                    <div class="detail-sub">
+                      ROI <span class="lang-sub">報酬率</span>
+                      <span class="${roiClass}">${roi}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+      }
+      document.getElementById('stockListBody').innerHTML = listHtml;
+
+      document.getElementById('dashTotalCost').innerText = formatCurrency(lastRow[2] || '0');
+      document.getElementById('dashTotalValue').innerText = formatCurrency(lastRow[6] || '0');
+      let todayVal = parseFloat((lastRow[7] || '0').replace(/,/g, ''));
+      document.getElementById('dashTodayProfit').className = "dash-value " + (todayVal > 0 ? "text-up" : (todayVal < 0 ? "text-down" : ""));
+      document.getElementById('dashTodayProfit').innerText = formatCurrency(lastRow[7] || '0');
+      let totalVal = parseFloat((lastRow[8] || '0').replace(/,/g, ''));
+      document.getElementById('dashTotalProfit').className = "dash-value " + (totalVal > 0 ? "text-up" : (totalVal < 0 ? "text-down" : ""));
+      document.getElementById('dashTotalProfit').innerText = formatCurrency(lastRow[8] || '0');
+      let roiStr = lastRow[9] || '0%';
+      let roiVal = parseFloat(roiStr.replace(/,/g, ''));
+      document.getElementById('dashROI').innerHTML = `(<span class="${roiVal > 0 ? 'text-up' : (roiVal < 0 ? 'text-down' : '')}">${roiStr}</span>)`;
+    }
+
+    // ========== 配息記錄 JS ==========
+    function toggleDividendCard() {
+      const content = document.getElementById('divContent');
+      const chevron = document.getElementById('divChevron');
+      if (content.style.display === 'none' || content.style.display === '') {
+        content.style.display = 'block';
+        chevron.classList.add('rotate');
+      } else {
+        content.style.display = 'none';
+        chevron.classList.remove('rotate');
+      }
+    }
+
+    async function loadDividends() {
+      try {
+        const res = await fetch(`${GAS_API_URL}?action=getDividend`);
+        const data = await res.json();
+        renderDividends(data);
+      } catch (err) {}
+    }
+
+    function renderDividends(data) {
+      let html = '';
+      if(!data || data.error || data.length < 2) {
+        html = '<div class="text-center text-muted small py-2">Chưa có bản ghi<br><span class="lang-sub">尚無配息記錄</span></div>';
+      } else {
+        for (let i = 1; i < data.length; i++) {
+          let symbol = data[i][0];
+          let date = data[i][1];
+          let amount = data[i][2];
+          let amountNum = parseFloat(amount.toString().replace(/,/g, '')) || 0;
+          
+          html += `
+            <div class="div-item">
+              <span class="fw-bold me-2" style="color: var(--text-color); font-size: 0.85rem;">${symbol}</span>
+              <span class="text-muted" style="font-size: 0.75rem;"><i class="far fa-calendar me-1"></i>${date}</span>
+              <span class="fw-bold text-up ms-auto me-2" style="font-size: 0.85rem;">NT$ ${amountNum.toLocaleString()}</span>
+              <button class="btn-neo-icon" style="width: 22px; height: 22px; font-size: 0.65rem; color: var(--up-color);" onclick="deleteDividend(${i+1})"><i class="fas fa-times"></i></button>
+            </div>
+          `;
+        }
+      }
+      document.getElementById('dividendList').innerHTML = html;
+    }
+
+    async function addDividend() {
+      const symbol = document.getElementById('divSymbol').value.trim();
+      const date = document.getElementById('divDate').value;
+      const amount = document.getElementById('divAmount').value;
+      if(!symbol || !date || !amount) { alert('Vui lòng nhập đầy đủ thông tin (請輸入代號、日期與金額)'); return; }
+      
+      checkPassword(async function() {
+        const res = await apiPost({ action: 'addDividend', symbol, date, amount });
+        if(res.error) { alert('Lỗi: ' + res.error); return; }
+        document.getElementById('divSymbol').value = '';
+        document.getElementById('divDate').value = '';
+        document.getElementById('divAmount').value = '';
+        loadDividends();
+      });
+    }
+
+    function deleteDividend(rowNum) {
+      checkPassword(async function() {
+        const res = await apiPost({ action: 'deleteDividend', rowNum, password: '0000' });
+        if(res.error) { alert('Lỗi: ' + res.error); return; }
+        loadDividends();
+      });
+    }
+
+    // ========== 股票表單 JS ==========
+    function openAddModal() {
+      checkPassword(function() {
+        isEditing = false;
+        document.getElementById('stockForm').reset();
+        document.getElementById('symbol').readOnly = false;
+        document.getElementById('modalTitle').innerHTML = `<i class="fas fa-plus me-2"></i><span class="lang-main">Thêm Cổ Phiếu<span class="lang-sub">新增股票</span></span>`;
+        document.getElementById('submitBtn').innerHTML = 'Xác nhận lưu <span class="lang-sub">確認儲存</span>';
+        setStatus('');
+        formModal.show();
+      });
+    }
+
+    function editStock(symbol, lots, totalCost) {
+      checkPassword(function() {
+        isEditing = true;
+        document.getElementById('stockForm').reset();
+        document.getElementById('symbol').value = symbol.replace('TPE:', '');
+        document.getElementById('symbol').readOnly = true;
+        document.getElementById('lots').value = lots;
+        document.getElementById('totalCost').value = totalCost;
+        document.getElementById('modalTitle').innerHTML = `<i class="fas fa-edit me-2"></i><span class="lang-main">Sửa Dữ Liệu<span class="lang-sub">修改庫存資料</span></span>`;
+        document.getElementById('submitBtn').innerHTML = 'Xác nhận cập nhật <span class="lang-sub">確認更新</span>';
+        setStatus('');
+        formModal.show();
+      });
+    }
+
+    async function submitStock() {
+      let symbol = document.getElementById('symbol').value.trim();
+      const lots = document.getElementById('lots').value;
+      const totalCost = document.getElementById('totalCost').value;
+      if(!symbol || !lots || !totalCost) { setStatus('<i class="fas fa-exclamation-circle"></i> Vui lòng nhập đầy đủ! (請填寫完整資料！)', 'danger'); return; }
+      if (/^\d+$/.test(symbol)) symbol = 'TPE:' + symbol; else symbol = symbol.toUpperCase();
+      
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.innerHTML = 'Đang xử lý... <span class="lang-sub">處理中...</span>';
+      
+      const res = await apiPost({ action: 'addStock', symbol, lots, totalCost });
+      
+      if(res.error) {
+        setStatus(`<i class="fas fa-times-circle"></i> ${res.error}`, 'danger');
+      } else {
+        formModal.hide();
+        loadData(); 
+      }
+      btn.disabled = false; 
+      btn.innerHTML = 'Xác nhận lưu <span class="lang-sub">確認儲存</span>';
+    }
+
+    function removeStock(symbol) {
+      checkPassword(function() {
+        if(confirm(`Bạn có chắc muốn xóa "${symbol.replace('TPE:','')}"? \n(確定要移除「${symbol.replace('TPE:','')}」嗎？)`)) {
+          apiPost({ action: 'deleteStock', symbol }).then(res => {
+            if(res.error) { alert('Lỗi: ' + res.error); return; }
+            loadData();
+          });
+        }
+      });
+    }
+
+    // ========== 行動裝置滑動手勢 JS ==========
+    let touchStartX = 0, touchStartY = 0, touchActiveEl = null, touchDiffX = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        const swipeEl = e.target.closest('.swipe-content');
+        if (swipeEl) {
+            touchActiveEl = swipeEl;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            touchDiffX = 0;
+            touchActiveEl.style.transition = 'none';
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function(e) {
+        if (touchActiveEl) {
+            let currentX = e.touches[0].clientX;
+            let currentY = e.touches[0].clientY;
+            let diffX = currentX - touchStartX;
+            let diffY = currentY - touchStartY;
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                touchDiffX = diffX;
+                let isSwiped = touchActiveEl.classList.contains('swiped');
+                let translate = isSwiped ? -110 + diffX : diffX;
+                if (translate < -110) translate = -110;
+                if (translate > 0) translate = 0;
+                touchActiveEl.style.transform = `translateX(${translate}px)`;
+            } else {
+                touchActiveEl.style.transition = 'transform 0.3s ease';
+                touchActiveEl = null; 
+            }
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchend', function() {
+        if (touchActiveEl) {
+            touchActiveEl.style.transition = 'transform 0.3s ease';
+            let isSwiped = touchActiveEl.classList.contains('swiped');
+            
+            if (isSwiped) {
+                if (touchDiffX > 40) {
+                    touchActiveEl.classList.remove('swiped');
+                    touchActiveEl.style.transform = 'translateX(0)';
+                } else {
+                    touchActiveEl.style.transform = 'translateX(-110px)';
+                }
+            } else {
+                if (touchDiffX < -40) {
+                    touchActiveEl.classList.add('swiped');
+                    touchActiveEl.style.transform = 'translateX(-110px)';
+                } else {
+                    touchActiveEl.style.transform = 'translateX(0)';
+                }
+            }
+            touchActiveEl = null;
+        }
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.swipe-content') && !e.target.closest('.swipe-btn')) {
+            document.querySelectorAll('.swipe-content.swiped').forEach(el => {
+                el.classList.remove('swiped');
+                el.style.transform = 'translateX(0)';
+            });
+        }
+    });
+
+    // --- 初始化與自動刷新 ---
+    window.onload = function() {
+      formModal = new bootstrap.Modal(document.getElementById('formModal'));
+      loadData();
+      loadDividends(); 
+    };
+    setInterval(() => { if (!isEditing && !formModal._isShown) loadData(); }, 15000); 
+  </script>
+</body>
+</html>
